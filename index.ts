@@ -19,69 +19,30 @@ enum InputRaw {
 }
 
 interface Input {
-  isRight(): boolean;
-  isLeft(): boolean;
-  isUp(): boolean;
-  isDown(): boolean;
+  handle(): void;
 }
 
 class Right implements Input {
-  isRight(): boolean {
-    return true;
-  }
-  isLeft(): boolean {
-    return false;
-  }
-  isUp(): boolean {
-    return false;
-  }
-  isDown(): boolean {
-    return false;
+  handle(): void {
+    moveHorizontal(1);
   }
 }
 
 class Left implements Input {
-  isRight(): boolean {
-    return false;
-  }
-  isLeft(): boolean {
-    return true;
-  }
-  isUp(): boolean {
-    return false;
-  }
-  isDown(): boolean {
-    return false;
+  handle(): void {
+    moveHorizontal(-1);
   }
 }
 
 class Up implements Input {
-  isRight(): boolean {
-    return false;
-  }
-  isLeft(): boolean {
-    return false;
-  }
-  isUp(): boolean {
-    return true;
-  }
-  isDown(): boolean {
-    return false;
+  handle(): void {
+    moveVertical(-1);
   }
 }
 
 class Down implements Input {
-  isRight(): boolean {
-    return false;
-  }
-  isLeft(): boolean {
-    return false;
-  }
-  isUp(): boolean {
-    return false;
-  }
-  isDown(): boolean {
-    return true;
+  handle(): void {
+    moveVertical(1);
   }
 }
 
@@ -184,14 +145,7 @@ function handleInputs() {
 }
 
 function handleInput(current: Input) {
-  if (current.isLeft())
-    moveHorizontal(-1);
-  else if (current.isRight())
-    moveHorizontal(1);
-  else if (current.isUp())
-    moveVertical(-1);
-  else if (current.isDown())
-    moveVertical(1);
+  current.handle();
 }
 
 function draw() {
